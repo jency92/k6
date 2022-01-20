@@ -7,8 +7,17 @@ spec:
     spec:
       containers:
       - name: k6
-        image: docker.io/jency92/k6 
+        image: docker.io/jency92/k6
+        command: ["k6", "run",  "/tmp/k6/script.js"]
+        volumeMounts:
+         - mountPath: /tmp/k6
+           name: volume
+      volumes:
+      - name: volume
+        hostPath:
+          path: /root/k6
+          type: Directory        
       restartPolicy: Never
-  backoffLimit: 4
+  backoffLimit: 4      
 
 
